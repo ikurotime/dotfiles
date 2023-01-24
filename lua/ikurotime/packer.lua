@@ -22,11 +22,16 @@ return require('packer').startup(function(use)
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   use('nvim-treesitter/playground')
   use('theprimeagen/harpoon')
+  use('windwp/nvim-ts-autotag')
+  use('windwp/nvim-autopairs')
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
+  use('jose-elias-alvarez/null-ls.nvim')
+  use('MunifTanjim/prettier.nvim')
   use {
   'VonHeikemen/lsp-zero.nvim',
   requires = {
+  {'lewis6991/gitsigns.nvim'}, -- Git decorators
   -- LSP Support
   {'neovim/nvim-lspconfig'},
   {'williamboman/mason.nvim'},
