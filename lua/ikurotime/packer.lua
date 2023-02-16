@@ -27,6 +27,7 @@ return require('packer').startup(function(use)
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
   use('jose-elias-alvarez/null-ls.nvim')
+  use('simrat39/rust-tools.nvim') -- extra functionality over rust-analyzer
   use('MunifTanjim/prettier.nvim')
   use {
   'VonHeikemen/lsp-zero.nvim',
