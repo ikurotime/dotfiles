@@ -1,8 +1,9 @@
 vim.opt.guicursor = ""
 
 vim.opt.nu = true
-vim. opt.relativenumber = true
-
+vim.opt.relativenumber = true
+vim.opt.cursorline = true 
+vim.api.nvim_set_hl(0, "CursorLineNr", { cterm=bold, bold=false,fg="#FFD191"})
 vim.opt.tabstop = 4
 vim.opt.softtabstop= 4
 vim.opt.shiftwidth= 4

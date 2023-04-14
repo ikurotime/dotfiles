@@ -1,4 +1,5 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
+ColorMyPencils()
 
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.vim]]
@@ -26,6 +27,7 @@ return require('packer').startup(function(use)
   use('windwp/nvim-autopairs')
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
+  use('github/copilot.vim')
   use('jose-elias-alvarez/null-ls.nvim')
   use('simrat39/rust-tools.nvim') -- extra functionality over rust-analyzer
   use('MunifTanjim/prettier.nvim')
