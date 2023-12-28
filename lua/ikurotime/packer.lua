@@ -18,7 +18,7 @@ return require('packer').startup(function(use)
         "themercorp/themer.lua",
         config = function()
             require("themer").setup({
-                colorscheme = "catppuccin",
+                colorscheme = "sonokai_deep",
                 styles = {
                     ["function"]    = { style = 'italic' },
                     functionbuiltin = { style = 'italic' },

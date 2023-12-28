@@ -82,6 +82,25 @@ nvim_lsp.rust_analyzer.setup {
         }
     }
 }
+nvim_lsp.clangd.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { "clangd", "--background-index" },
+    filetypes = { "c", "cpp", "objc", "objcpp" },
+    init_options = {
+        clangdFileStatus = true
+    }
+}
+nvim_lsp.gopls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { "gopls", "serve" },
+    filetypes = { "go" },
+    init_options = {
+        usePlaceholders = true,
+        completeUnimported = true,
+    }
+}
 nvim_lsp.elixirls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
