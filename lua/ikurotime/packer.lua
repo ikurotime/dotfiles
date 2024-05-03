@@ -29,6 +29,13 @@ return require('packer').startup(function(use)
             })
         end
     })
+    -- use({
+    --"Mofiqul/dracula.nvim",
+    -- as = "dracula",
+    --config = function()
+    --  vim.cmd("colorscheme dracula")
+    --end
+    --})
     use({ 'nvim-telescope/telescope-file-browser.nvim' })
     --  use ({ "catppuccin/nvim", as = "catppuccin",
     --  config = function()
