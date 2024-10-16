@@ -5,7 +5,7 @@ if (not status2) then return end
 
 mason.setup {}
 lspconfig.setup {
-    ensure_installed = { "tailwindcss", "tsserver", "volar", "eslint", "elixirls", "astro", "gopls",
+    ensure_installed = { "tailwindcss", "ts_ls", "volar", "eslint", "elixirls", "astro", "gopls",
         "lua_ls", "rust_analyzer" }
 
 }
