@@ -19,5 +19,5 @@ vim.keymap.set("n", "<leader>H", "<C-w>H")
 vim.keymap.set("n", "<leader>vv", "<cmd>:vs<CR>")
 vim.keymap.set("n", "<leader>bb", "<cmd>:split horizontal<CR>")
 
-vim.keymap.set("n", "<leader>s", "<cmd>:w<CR>")
+vim.keymap.set("n", "<leader>s", "<cmd>:w<CR><cmd>:Prettier<CR>")
 vim.keymap.set("n", "<leader>q", "<cmd>:q<CR>")
