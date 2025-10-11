@@ -1,0 +1,12 @@
+[general]
+import = [
+    "~/.config/alacritty/themes/themes/catppuccin_macchiato.toml"
+]
+
+[font]
+size = 16.0
+normal = { family = "CaskaydiaMono Nerd Font", style = "Regular" }
+
+[window]
+decorations = "transparent"
+padding = { x = 20, y = 30 }
