@@ -31,7 +31,8 @@ final_space = true
         style = "plain"
         background = "transparent"
         foreground = "#6c6c6c"
-        template = " {{ .HEAD}}{{ if or (.Working.Changed) (.Staged.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}↓{{ .Behind }}{{ end }}{{ if gt .Ahead 0 }}↑{{ .Ahead }}{{ end }}</> "
+        template = " {{ .HEAD}}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}↓{{ end }}{{ if gt .Ahead 0 }}↑{{ end }}</>"
+
     [blocks.segments.properties]
         branch_icon = ""
         commit_icon = "@"
