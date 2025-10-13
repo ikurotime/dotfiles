@@ -1,6 +1,12 @@
+# linux ---
+export PATH=$PATH:/home/kuro/.local/bin
+export PATH=$PATH:/usr/local/go/bin
 export NVM_DIR="$HOME/.nvm"
-      [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-      [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# ---
+#export NVM_DIR="$HOME/.nvm"
+#      [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+#      [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 
 alias v="nvim"
@@ -25,7 +31,7 @@ export AWS_PROFILE=infra_sdlc
 export PATH="$PATH:$(go env GOPATH)/bin"
 export PATH="$HOME/bin:$PATH"
 export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin/"
-export LLVM_DIR=$(brew --prefix llvm)/lib/cmake/llvm
+#export LLVM_DIR=$(brew --prefix llvm)/lib/cmake/llvm
 
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
 eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/kuro.toml)"
@@ -92,7 +98,7 @@ alias ls='ls --color'
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
-eval "$(/opt/homebrew/bin/brew shellenv)"
+#eval "$(/opt/homebrew/bin/brew shellenv)"
 
 
 
