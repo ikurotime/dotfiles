@@ -21,10 +21,13 @@ alias ps="pulumi stack ls"
 alias pspro="pulumi stack select maisa-ai/workload-pro"
 alias pspre="pulumi stack select maisa-ai/workload-pre"
 alias lg="lazygit"
+alias python="python3"
 export AWS_PROFILE=infra_sdlc
 export PATH="$PATH:$(go env GOPATH)/bin"
 export PATH="$HOME/bin:$PATH"
 export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin/"
+export IDF_PATH="$HOME/tmp/esp-idf"
+export PATH="$IDF_PATH/tools:$PATH"
 export LLVM_DIR=$(brew --prefix llvm)/lib/cmake/llvm
 
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
