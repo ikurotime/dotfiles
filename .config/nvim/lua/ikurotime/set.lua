@@ -3,7 +3,7 @@ vim.opt.guicursor = ""
 vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
-vim.api.nvim_set_hl(0, "CursorLineNr", { cterm = bold, bold = false, fg = "#FFD191" })
+vim.api.nvim_set_hl(0, "CursorLineNr", { bold = false, fg = "#FFD191" })
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
@@ -13,7 +13,8 @@ vim.opt.smartindent = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undodir = vim.fn.stdpath("state") .. "/undo"
+vim.fn.mkdir(vim.o.undodir, "p")
 vim.opt.undofile = true
 
 vim.opt.hlsearch = false

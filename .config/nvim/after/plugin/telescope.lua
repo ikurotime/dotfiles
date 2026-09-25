@@ -1,11 +1,12 @@
 local status, telescope = pcall(require, 'telescope')
+if not status then return end
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<C-p>', builtin.git_files, {})
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Find files" })
+vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = "Find Git files" })
 vim.keymap.set('n', '<leader>fw', function()
     builtin.grep_string({ search = vim.fn.input("Grep > ") });
 end)
-vim.keymap.set('n', '<leader>fl', builtin.resume, {})
+vim.keymap.set('n', '<leader>fl', builtin.resume, { desc = "Resume last search" })
 
 local function document_symbols_for_selected(prompt_bufnr)
     local action_state = require("telescope.actions.state")
@@ -90,7 +91,7 @@ local function document_symbols_for_selected(prompt_bufnr)
                     map("i", "<CR>", function(prompt_bufnr)
                         local selection = action_state.get_selected_entry()
                         actions.close(prompt_bufnr)
-                        vim.cmd("edit " .. selection.filename)
+                        vim.cmd.edit(vim.fn.fnameescape(selection.filename))
                         vim.api.nvim_win_set_cursor(0, { selection.lnum, selection.col - 1 })
                     end)
                     return true

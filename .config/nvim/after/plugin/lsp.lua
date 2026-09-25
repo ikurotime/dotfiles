@@ -1,8 +1,4 @@
-local status, nvim_lsp = pcall(require, "lspconfig")
-if (not status) then return end
-
-local protocol = require('vim.lsp.protocol')
-local util = require('lspconfig/util')
+-- Neovim 0.11 native LSP configuration.
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -23,43 +19,13 @@ local on_attach = function(client, bufnr)
     --buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
 end
 
-protocol.CompletionItemKind = {
-    '', -- Text
-    '', -- Method
-    '', -- Function
-    '', -- Constructor
-    '', -- Field
-    '', -- Variable
-    '', -- Class
-    'ﰮ', -- Interface
-    '', -- Module
-    '', -- Property
-    '', -- Unit
-    '', -- Value
-    '', -- Enum
-    '', -- Keyword
-    '﬌', -- Snippet
-    '', -- Color
-    '', -- File
-    '', -- Reference
-    '', -- Folder
-    '', -- EnumMember
-    '', -- Constant
-    '', -- Struct
-    '', -- Event
-    'ﬦ', -- Operator
-    '', -- TypeParameter
-}
-
 -- Set up completion using nvim_cmp with LSP source
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Helper function to safely setup LSP servers
 local function setup_server(server_name, config)
-    local ok, server = pcall(function() return nvim_lsp[server_name] end)
-    if ok and server then
-        server.setup(config)
-    end
+    vim.lsp.config(server_name, config)
+    vim.lsp.enable(server_name)
 end
 
 -- Flow
@@ -73,7 +39,7 @@ setup_server('rust_analyzer', {
     on_attach = on_attach,
     capabilities = capabilities,
     filetypes = { "rust" },
-    root_dir = util.root_pattern("Cargo.toml"),
+    root_markers = { "Cargo.toml", ".git" },
     settings = {
         ["rust-analyzer"] = {
             cargo = {
@@ -120,7 +86,7 @@ setup_server('elixirls', {
 })
 
 -- Vue (Volar)
-setup_server('volar', {
+setup_server('vue_ls', {
     on_attach = on_attach,
     capabilities = capabilities,
     filetypes = { "vue" },
@@ -129,7 +95,7 @@ setup_server('volar', {
 -- TypeScript
 setup_server('ts_ls', {
     on_attach = on_attach,
-    filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
     cmd = { "typescript-language-server", "--stdio" },
     capabilities = capabilities
 })
@@ -189,30 +155,12 @@ setup_server('eslint', {
     },
 })
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-        underline = true,
-        update_in_insert = false,
-        virtual_text = { spacing = 4, prefix = "●" },
-        severity_sort = true,
-    }
-)
-
--- Diagnostic symbols in the sign column (gutter)
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
-
 vim.diagnostic.config({
-    virtual_text = {
-        prefix = '●'
-    },
-    update_in_insert = true,
-    float = {
-        source = "always", -- Or "if_many"
-    },
+    underline = true,
+    virtual_text = { spacing = 4, prefix = "●" },
+    severity_sort = true,
+    update_in_insert = false,
+    float = { source = "always" },
 })
 
 -- Global format on save as a fallback (for telescope-opened files)
@@ -221,22 +169,29 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*",
     callback = function(ev)
         local buf = ev.buf
-        
+
         -- Check if this buffer has any LSP clients with formatting capability
         local clients = vim.lsp.get_clients({ bufnr = buf })
         local has_formatter = false
-        
+
         for _, client in ipairs(clients) do
             if client.supports_method("textDocument/formatting") then
                 has_formatter = true
                 break
             end
         end
-        
+
         if has_formatter then
             vim.lsp.buf.format({
                 bufnr = buf,
                 timeout_ms = 2000,
+                filter = function(client)
+                    -- Use none-ls when an external formatter is available.
+                    local sources = require("null-ls.sources")
+                    local methods = require("null-ls.methods")
+                    local available = sources.get_available(vim.bo[buf].filetype, methods.internal.FORMATTING)
+                    return #available == 0 or client.name == "null-ls"
+                end,
             })
         end
     end,

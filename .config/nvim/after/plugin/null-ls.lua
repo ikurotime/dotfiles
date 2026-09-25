@@ -9,14 +9,14 @@ end
 local sources = {}
 
 -- Add prettierd/prettier formatting if available (for JS/TS/CSS/HTML/JSON)
-if null_ls.builtins.formatting.prettierd then
+if vim.fn.executable("prettierd") == 1 then
     table.insert(sources, null_ls.builtins.formatting.prettierd)
-elseif null_ls.builtins.formatting.prettier then
+elseif vim.fn.executable("prettier") == 1 then
     table.insert(sources, null_ls.builtins.formatting.prettier)
 end
 
 -- Add stylua for Lua formatting if available
-if null_ls.builtins.formatting.stylua then
+if vim.fn.executable("stylua") == 1 then
     table.insert(sources, null_ls.builtins.formatting.stylua)
 end
 

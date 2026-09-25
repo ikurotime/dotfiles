@@ -43,7 +43,7 @@ brew install stow
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/yourusername/dotfiles.git ~/dotfiles
+git clone https://github.com/ikurotime/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ```
 
@@ -124,3 +124,8 @@ source ~/.zshrc
 - Go binaries path is included in PATH
 - LLVM path configured via Homebrew
 - Oh My Posh is disabled in Apple Terminal
+
+## Neovim across laptops
+
+See the [Neovim setup guide](.config/nvim/README.md) for installing just the editor config,
+syncing plugin versions, and using themes, the file tree, and keybinding search.
