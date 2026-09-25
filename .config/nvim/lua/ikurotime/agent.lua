@@ -50,14 +50,16 @@ function M.toggle_terminal()
             return
         end
         if vim.fn.jobwait({ session.job }, 0)[1] == -1 then
-            vim.cmd("botright 16split")
+            vim.cmd("botright vsplit")
+            vim.api.nvim_win_set_width(0, math.floor(vim.o.columns * 0.4))
             vim.api.nvim_win_set_buf(0, session.buf)
             terminal_statusline()
             vim.cmd.startinsert()
             return
         end
     end
-    vim.cmd("botright 16new")
+    vim.cmd("botright vnew")
+    vim.api.nvim_win_set_width(0, math.floor(vim.o.columns * 0.4))
     local buf = vim.api.nvim_get_current_buf()
     vim.bo.bufhidden = "hide"
     vim.b.codex_root = root
