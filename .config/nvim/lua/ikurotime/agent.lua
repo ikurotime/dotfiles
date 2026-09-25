@@ -1,6 +1,11 @@
 local M = {}
 local terminals = {}
 
+local function terminal_statusline()
+    -- A split can later show a regular file, so keep its filename in that case.
+    vim.wo.statusline = "%{get(b:, 'codex_root', '') != '' ? ' Codex' : expand('%:~:.')}%h%m%r%=%l:%c "
+end
+
 function M.root()
     local name = vim.api.nvim_buf_get_name(0)
     local start = vim.bo.buftype == "" and name ~= "" and name or vim.fn.getcwd()
@@ -47,6 +52,7 @@ function M.toggle_terminal()
         if vim.fn.jobwait({ session.job }, 0)[1] == -1 then
             vim.cmd("botright 16split")
             vim.api.nvim_win_set_buf(0, session.buf)
+            terminal_statusline()
             vim.cmd.startinsert()
             return
         end
@@ -55,6 +61,7 @@ function M.toggle_terminal()
     local buf = vim.api.nvim_get_current_buf()
     vim.bo.bufhidden = "hide"
     vim.b.codex_root = root
+    terminal_statusline()
     local job = vim.fn.jobstart({ "codex" }, { term = true, cwd = root })
     if job <= 0 then
         vim.notify("Could not start Codex", vim.log.levels.ERROR)
