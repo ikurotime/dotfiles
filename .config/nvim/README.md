@@ -76,6 +76,7 @@ Run `codex login` and sign in with ChatGPT for subscription access, subject to y
 workspace permissions. API-key authentication uses separate API billing.
 See [OpenAI authentication docs](https://learn.chatgpt.com/docs/auth).
 
-Hide the Codex terminal with Alt-a, or Ctrl-\ then Ctrl-n to enter terminal normal
-mode and Space a a to hide it. Hiding preserves the running CLI session; reopening
+While typing in Codex, press Ctrl-g to hide the pane directly. Alt-a also works.
+Press Escape twice to enter terminal normal mode, then Space a a to hide it.
+The standard Ctrl-\ then Ctrl-n escape also remains available. Hiding preserves the running CLI session; reopening
 reuses it for that project. Closing Neovim ends the embedded terminal process.

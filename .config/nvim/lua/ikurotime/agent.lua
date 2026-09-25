@@ -63,6 +63,8 @@ function M.toggle_terminal()
     terminals[root] = { buf = buf, job = job }
     vim.keymap.set("t", "<C-\\><C-n>", "<C-\\><C-n>", { buffer = buf, desc = "Leave terminal input" })
     vim.keymap.set({ "n", "t" }, "<M-a>", M.toggle_terminal, { buffer = buf, desc = "Hide Codex terminal" })
+    vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { buffer = buf, desc = "Leave Codex input" })
+    vim.keymap.set({ "n", "t" }, "<C-g>", M.toggle_terminal, { buffer = buf, desc = "Hide Codex terminal" })
     vim.cmd.startinsert()
 end
 
