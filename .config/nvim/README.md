@@ -45,3 +45,37 @@ Undo history, downloaded plugins, language servers, and credentials also stay lo
 
 See [commands and shortcuts](COLORSCHEME_OPTIONS.md) for the theme picker, file tree,
 and searchable keybindings. Space is the leader key.
+
+## Working with Codex
+
+Keep the Codex app and Neovim on the same project checkout, including the same
+worktree if one is in use. Files changed on disk reload on focus or buffer entry
+when there are no unsaved buffer edits. Conflicting unsaved edits retain Neovim's
+normal warning. Space a r checks for external changes manually.
+
+| Shortcut | Action |
+| --- | --- |
+| Space a c | Copy project path and current file/line reference |
+| Visual selection, Space a c | Copy reference plus selected full lines |
+| Space a a | Toggle a Codex CLI terminal for this project |
+| Space g s | Git status, including new/untracked files |
+| Space g d | Side-by-side diff of current tracked file against index |
+| Space g p | Preview current Git hunk |
+| ]c / [c | Next / previous Git hunk |
+| Space t f | Toggle format on save for this Neovim session |
+
+Paste copied context into the Codex app yourself. These mappings do not send prompts.
+Clipboard support is needed for pasting outside Neovim; the unnamed register also
+receives the copied context. Use `:FormatToggle`, `:AgentContext`, or `:Codex` as
+command alternatives. Close the extra diff window and run `:diffoff` to leave review.
+
+The terminal is optional and starts a separate CLI conversation, not the current
+app task. It uses `codex` from PATH and the CLI's existing model/settings; it does
+not override your GPT-6 choice in the app. Install Codex CLI on each laptop if needed.
+Run `codex login` and sign in with ChatGPT for subscription access, subject to your
+workspace permissions. API-key authentication uses separate API billing.
+See [OpenAI authentication docs](https://learn.chatgpt.com/docs/auth).
+
+Hide the Codex terminal with Alt-a, or Ctrl-\ then Ctrl-n to enter terminal normal
+mode and Space a a to hide it. Hiding preserves the running CLI session; reopening
+reuses it for that project. Closing Neovim ends the embedded terminal process.

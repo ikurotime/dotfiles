@@ -21,3 +21,5 @@ if is_win then
 end
 
 require("ikurotime.plugins")
+
+require("ikurotime.agent").setup()

@@ -168,6 +168,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     group = vim.api.nvim_create_augroup("GlobalLspFormat", { clear = true }),
     pattern = "*",
     callback = function(ev)
+        if vim.g.disable_autoformat or vim.b[ev.buf].disable_autoformat then return end
         local buf = ev.buf
 
         -- Check if this buffer has any LSP clients with formatting capability
