@@ -72,9 +72,11 @@ function M.setup()
     vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "TermLeave" }, {
         group = group,
         callback = function()
-            if vim.fn.getcmdwintype() == "" and vim.fn.mode() ~= "c" then
-                vim.cmd("checktime")
-            end
+            vim.schedule(function()
+                if vim.fn.getcmdwintype() == "" and vim.fn.mode() ~= "c" then
+                    vim.cmd("checktime")
+                end
+            end)
         end,
     })
     vim.api.nvim_create_user_command("AgentContext", function(opts) M.copy_context(opts.bang) end, { bang = true })
